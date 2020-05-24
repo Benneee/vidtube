@@ -6,6 +6,8 @@ import { Credentials, CredentialsService } from './credentials.service';
 export interface LoginContext {
   username: string;
   password: string;
+  accessToken?: string;
+  userId?: string;
   remember?: boolean;
 }
 
@@ -28,7 +30,8 @@ export class AuthenticationService {
     // Replace by proper authentication call
     const data = {
       username: context.username,
-      token: '123456'
+      accessToken: '123456',
+      userId: '123456'
     };
     this.credentialsService.setCredentials(data, context.remember);
     return of(data);
