@@ -52,8 +52,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   login(payload: AuthCredentials) {
-    const { username } = this.loginForm.value;
     this.isLoading = true;
+    const { username } = this.loginForm.value;
     const login$ = this.authService.login(payload);
     login$
       .pipe(
