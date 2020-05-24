@@ -33,14 +33,14 @@
     "@ng-bootstrap/ng-bootstrap": "^5.0.0-rc.1",
     "@ngx-translate/core": "^11.0.1",
     "bootstrap": "^4.1.1",
-    "jquery": "^3.5.0",
+    "jquery": "^1.9.1",
     "ngx-toastr": "^10.2.0",
     "popper.js": "^1.16.1",
     "rxjs": "^6.5.2",
     "zone.js": "^0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.801.0",
+    "@angular-devkit/build-angular": "^0.803.24",
     "@angular/cli": "~8.1.0",
     "@angular/compiler-cli": "^8.1.0",
     "@angular/language-service": "^8.1.0",
