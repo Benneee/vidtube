@@ -1,8 +1,9 @@
 <header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="https://github.com/ngx-rocket" translate
-      >APP_NAME</a
-    >
+  <nav class="navbar navbar-expand-lg">
+    <a routerLink="/home" translate class="text-light">
+      Vidtube
+      <i class="fas fa-video"></i>
+    </a>
     <button
       class="navbar-toggler"
       type="button"
@@ -18,7 +19,7 @@
       class="collapse navbar-collapse float-xs-none"
       [ngbCollapse]="menuHidden"
     >
-      <div class="navbar-nav">
+      <!-- <div class="navbar-nav">
         <a
           class="nav-item nav-link text-uppercase"
           routerLink="/home"
@@ -35,28 +36,9 @@
           <i class="fas fa-question-circle"></i>
           <span translate>About</span>
         </a>
-      </div>
+      </div> -->
       <div class="navbar-nav ml-auto">
-        <div
-          class="nav-item"
-          ngbDropdown
-          display="dynamic"
-          placement="bottom-right"
-        >
-          <a id="language-dropdown" class="nav-link" ngbDropdownToggle>{{
-            currentLanguage
-          }}</a>
-          <div ngbDropdownMenu aria-labelledby="language-dropdown">
-            <button
-              class="dropdown-item"
-              *ngFor="let language of languages"
-              (click)="setLanguage(language)"
-            >
-              {{ language }}
-            </button>
-          </div>
-        </div>
-        <div
+        <!-- <div
           class="nav-item"
           ngbDropdown
           display="dynamic"
@@ -67,14 +49,35 @@
           </a>
           <div ngbDropdownMenu aria-labelledby="user-dropdown">
             <h6 class="dropdown-header">
-              <span translate>Logged in as</span> <b>{{ username }}</b>
+              <span translate>Logged in as</span> &nbsp; <b>{{ username }}</b>
             </h6>
             <div class="dropdown-divider"></div>
             <button class="dropdown-item" (click)="logout()" translate>
               Logout
             </button>
           </div>
-        </div>
+        </div> -->
+
+        <a
+          class="nav-item nav-link text-light"
+          routerLink="/home"
+          routerLinkActive="active"
+        >
+          <i class="fas fa-user"></i> &nbsp;
+          <span translate>Profile</span>
+        </a>
+
+        <a
+          class="nav-item nav-link text-light"
+          routerLink="/home"
+          routerLinkActive="active"
+        >
+          <i class="fas fa-heart"></i> &nbsp;
+          <span translate>Favorites</span>
+        </a>
+        <a (click)="logout()" class="text-light mt-2 ml-3">
+          <i class="fas fa-sign-out-alt"></i>
+        </a>
       </div>
     </div>
   </nav>
