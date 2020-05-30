@@ -1,12 +1,56 @@
 <app-loader [isLoading]="isLoading"></app-loader>
+<app-header></app-header>
 
 <div class="container-fluid">
-  <div class="jumbotron text-center">
-    <h1>
-      <img class="logo" src="assets/ngx-rocket-logo.png" alt="angular logo" />
-      <span translate>Hello world !</span>
-    </h1>
-    <h5>Welcome to vidtube</h5>
-    <!-- <app-loader [isLoading]="isLoading"></app-loader> -->
+  <div class="row" *ngIf="videos">
+    <div class="col-md-4 col-12 col-lg-3" *ngFor="let v of videos">
+      <div class="card mt-lg-2 mt-md-2 mt-3">
+        <div class="card-img embed-responsive embed-responsive-4by3">
+          <video
+            class="embed-responsive-item"
+            height="153.34"
+            width="273.31"
+            (click)="goToVideo(v.id)"
+          >
+            <source [src]="v.url" type="video/mp4" />
+            Sorry, your browser doesn't support embedded videos.
+          </video>
+        </div>
+        <div class="card-text">
+          <p class="font-weight-bold p-0 text-center text-capitalize">
+            {{ v?.title }}
+          </p>
+          <div class="d-flex justify-content-around">
+            <button
+              data-toggle="tooltip"
+              class="border-0"
+              data-placement="bottom"
+              title=" {{ v?.comments?.length }} comments"
+            >
+              {{ v?.comments?.length }} <i class="fas fa-comments"></i>
+            </button>
+            <button
+              data-toggle="tooltip"
+              class="border-0"
+              data-placement="bottom"
+              title=" {{ v?.upvotes }} upvotes"
+            >
+              {{ v?.upvotes }} <i class="fas fa-thumbs-up"></i>
+            </button>
+            <button
+              data-toggle="tooltip"
+              class="border-0"
+              data-placement="bottom"
+              title=" {{ v?.downvotes }} downvotes"
+            >
+              {{ v?.downvotes }} <i class="fas fa-thumbs-down"></i>
+            </button>
+          </div>
+          <div class="text-center mt-2">
+            <span>{{ v?.date | date: 'MMM dd, yyyy, hh:ss aa' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

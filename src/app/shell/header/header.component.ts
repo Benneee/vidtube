@@ -16,14 +16,18 @@ const log = new Logger('Logout');
 export class HeaderComponent implements OnInit {
   menuHidden = true;
   isLoading = false;
+  isAuthenticated: boolean;
 
   constructor(
     private router: Router,
     private credentialsService: CredentialsService,
     private i18nService: I18nService,
     private authService: AuthService,
-    private toastr: ToastrService
-  ) {}
+    private toastr: ToastrService,
+    private credService: CredentialsService
+  ) {
+    this.isAuthenticated = credService.isAuthenticated();
+  }
 
   ngOnInit() {}
 
@@ -60,6 +64,10 @@ export class HeaderComponent implements OnInit {
           this.toastr.error(name, 'Logout');
         }
       );
+  }
+
+  login() {
+    this.router.navigateByUrl('/login');
   }
 
   get currentLanguage(): string {
