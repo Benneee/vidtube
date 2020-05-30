@@ -8,6 +8,7 @@ const routes = {
 };
 
 export interface Video {
+  _id?: string;
   title: string;
   url: string;
   description: string;
@@ -26,6 +27,6 @@ export class VideoService extends BaseService<any> {
   }
 
   getAllVideos(): Observable<any> {
-    return this.sendGet(routes.videos);
+    return this.sendGet(routes.videos, false);
   }
 }

@@ -16,7 +16,7 @@
     </button>
     <div
       id="navbar-menu"
-      class="collapse navbar-collapse float-xs-none"
+      class="collapse navbar-collapse text-light float-xs-none"
       [ngbCollapse]="menuHidden"
     >
       <!-- <div class="navbar-nav">
@@ -62,6 +62,7 @@
           class="nav-item nav-link text-light"
           routerLink="/home"
           routerLinkActive="active"
+          *ngIf="isAuthenticated"
         >
           <i class="fas fa-user"></i> &nbsp;
           <span translate>Profile</span>
@@ -71,12 +72,24 @@
           class="nav-item nav-link text-light"
           routerLink="/home"
           routerLinkActive="active"
+          *ngIf="isAuthenticated"
         >
           <i class="fas fa-heart"></i> &nbsp;
           <span translate>Favorites</span>
         </a>
-        <a (click)="logout()" class="text-light mt-2 ml-3">
+        <a
+          *ngIf="isAuthenticated"
+          (click)="logout()"
+          class="text-light mt-2 ml-3"
+        >
           <i class="fas fa-sign-out-alt"></i>
+        </a>
+        <a
+          *ngIf="!isAuthenticated"
+          (click)="login()"
+          class="text-light mt-2 ml-3"
+        >
+          <i class="fas fa-sign-in-alt"></i>
         </a>
       </div>
     </div>

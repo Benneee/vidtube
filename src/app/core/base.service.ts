@@ -20,14 +20,21 @@ export class BaseService<M> {
     return token || null;
   }
 
-  sendGet(url: any): Observable<M> {
-    this.headers = {
-      headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token })
-    };
-    return this.httpClient.get(url, this.headers).pipe(
-      map((body: any) => body),
-      catchError(this.handleError)
-    );
+  sendGet(url: any, needsHeaders: boolean): Observable<M> {
+    if (needsHeaders === true) {
+      this.headers = {
+        headers: new HttpHeaders({ Authorization: 'Bearer ' + this.token })
+      };
+      return this.httpClient.get(url, this.headers).pipe(
+        map((body: any) => body),
+        catchError(this.handleError)
+      );
+    } else {
+      return this.httpClient.get(url).pipe(
+        map((body: any) => body),
+        catchError(this.handleError)
+      );
+    }
   }
 
   sendPost(
