@@ -1,0 +1,69 @@
+@import "src/theme/theme-variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
+
+.login-area {
+  background: rgb(84, 11, 91);
+  min-height: 100vh;
+}
+
+.card {
+  height: 50vh;
+  // margin-top: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: none;
+  background: transparent;
+
+  label {
+    color: #fff;
+    font-family: "B612", sans-serif;
+  }
+  input:not(.fa) {
+    font-family: "B612", sans-serif;
+  }
+}
+
+h4,
+h2 {
+  font-family: "B612", sans-serif;
+}
+
+.img-fluid {
+  margin-top: 0.5rem;
+}
+
+.register-text {
+  font-family: "B612", sans-serif;
+
+  a {
+    text-decoration: underline;
+    font-family: "B612", sans-serif;
+  }
+}
+
+.logo {
+  background: url("../../assets/vidtube-bg.svg");
+  background-size: cover;
+  background-position: center;
+  min-height: 50vh;
+  background-color: gray;
+}
+
+.ng-invalid.ng-touched:not(form) {
+  border-left: 4px solid theme-color("danger");
+}
+
+.btn-block {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .logo {
+    display: none;
+  }
+
+  .card {
+    margin-top: 5px;
+  }
+}
