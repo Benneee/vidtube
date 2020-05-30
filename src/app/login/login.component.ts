@@ -28,12 +28,12 @@ export class LoginComponent implements OnInit, OnDestroy {
   error: string | undefined;
   loginForm!: FormGroup;
   isLoading = false;
+  fieldTextType: boolean;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private i18nService: I18nService,
     private credsService: CredentialsService,
     private authService: AuthService,
     private toastr: ToastrService
@@ -46,14 +46,17 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnDestroy() {}
 
   submit() {
-    log.debug('values: ', this.loginForm.value);
     const { username, password } = this.loginForm.value;
     this.login({ username, password });
   }
 
+  toggleFieldTextType() {
+    this.fieldTextType = !this.fieldTextType;
+  }
+
   login(payload: AuthCredentials) {
-    const { username } = this.loginForm.value;
     this.isLoading = true;
+    const { username } = this.loginForm.value;
     const login$ = this.authService.login(payload);
     login$
       .pipe(
@@ -81,22 +84,14 @@ export class LoginComponent implements OnInit, OnDestroy {
         (error: any) => {
           log.debug('error: ', error);
           const errorObj = JSON.parse(error);
-          const name = errorObj['name'];
+          const name = errorObj['name'].message;
           this.toastr.error(name, 'Login');
         }
       );
   }
 
-  setLanguage(language: string) {
-    this.i18nService.language = language;
-  }
-
-  get currentLanguage(): string {
-    return this.i18nService.language;
-  }
-
-  get languages(): string[] {
-    return this.i18nService.supportedLanguages;
+  get controls() {
+    return this.loginForm.controls;
   }
 
   private createForm() {

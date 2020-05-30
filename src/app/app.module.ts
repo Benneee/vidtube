@@ -1,3 +1,4 @@
+import { RegisterModule } from './register/register.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -30,6 +31,7 @@ import { AppRoutingModule } from './app-routing.module';
     SharedModule,
     ShellModule,
     HomeModule,
+    RegisterModule,
     LoginModule,
     AppRoutingModule // must be imported as the last module as it contains the fallback route
   ],
