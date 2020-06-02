@@ -1,4 +1,107 @@
 <app-loader [isLoading]="isLoading"></app-loader>
 <app-header></app-header>
 
-<div>Video Detail works</div>
+<div class="container-fluid">
+  <div class="row" *ngIf="video">
+    <div class="col-md-8 col-12 mt-3">
+      <div class="embed-responsive embed-responsive-21by9">
+        <video class="embed-responsive-item main-video" controls>
+          <source [src]="video?.url" type="video/mp4" />
+          Sorry, your browser doesn't support embedded videos.
+        </video>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-6 float-left">
+          <h4 class="font-weight-bold">{{ video?.title }}</h4>
+          <p>{{ video?.date | date: 'MMM dd, yyyy' }}</p>
+        </div>
+        <div class="col-6">
+          <div class="d-flex justify-content-end">
+            <button
+              data-toggle="tooltip"
+              class="border-0 mr-2"
+              data-placement="bottom"
+              title=" {{ video?.comments?.length }} comments"
+            >
+              {{ video?.comments?.length }} <i class="fas fa-comments"></i>
+            </button>
+            <button
+              data-toggle="tooltip"
+              class="border-0 mr-2"
+              data-placement="bottom"
+              title=" {{ video?.upvotes }} upvotes"
+            >
+              {{ video?.upvotes }} <i class="fas fa-thumbs-up"></i>
+            </button>
+            <button
+              data-toggle="tooltip"
+              class="border-0"
+              data-placement="bottom"
+              title=" {{ video?.downvotes }} downvotes"
+            >
+              {{ video?.downvotes }} <i class="fas fa-thumbs-down"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <hr />
+
+      <h4>About this video</h4>
+      <p class="m-0 p-0">{{ video?.description }}</p>
+    </div>
+    <div class="col-md-4 col-12">
+      <div class="row" *ngIf="allVideos">
+        <div class="col-12" *ngFor="let v of allVideos">
+          <div class="card my-2">
+            <div class="card-img embed-responsive embed-responsive-4by3">
+              <video
+                class="embed-responsive-item"
+                height="153.34"
+                width="273.31"
+                (click)="goToVideo(v._id)"
+              >
+                <source [src]="v.url" type="video/mp4" />
+                Sorry, your browser doesn't support embedded videos.
+              </video>
+            </div>
+            <div class="card-text">
+              <p class="font-weight-bold p-0 text-center text-capitalize">
+                {{ v?.title }}
+              </p>
+              <div class="d-flex justify-content-around">
+                <button
+                  data-toggle="tooltip"
+                  class="border-0"
+                  data-placement="bottom"
+                  title=" {{ v?.comments?.length }} comments"
+                >
+                  {{ v?.comments?.length }} <i class="fas fa-comments"></i>
+                </button>
+                <button
+                  data-toggle="tooltip"
+                  class="border-0"
+                  data-placement="bottom"
+                  title=" {{ v?.upvotes }} upvotes"
+                >
+                  {{ v?.upvotes }} <i class="fas fa-thumbs-up"></i>
+                </button>
+                <button
+                  data-toggle="tooltip"
+                  class="border-0"
+                  data-placement="bottom"
+                  title=" {{ v?.downvotes }} downvotes"
+                >
+                  {{ v?.downvotes }} <i class="fas fa-thumbs-down"></i>
+                </button>
+              </div>
+              <div class="text-center mt-2">
+                <span>{{ v?.date | date: 'MMM dd, yyyy, hh:ss aa' }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

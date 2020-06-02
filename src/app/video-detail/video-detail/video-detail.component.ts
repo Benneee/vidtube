@@ -1,5 +1,5 @@
 import { finalize } from 'rxjs/operators';
-import { VideoService } from './../../home/video.service';
+import { VideoService, Video } from './../../home/video.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -15,6 +15,8 @@ const log = new Logger('Video');
 export class VideoDetailComponent implements OnInit, OnDestroy {
   videoID: string;
   isLoading = false;
+  video: Video;
+  allVideos: any[] = [];
 
   constructor(
     private router: Router,
@@ -25,6 +27,7 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getVideoId();
+    this.getAllVideos();
   }
 
   ngOnDestroy() {}
@@ -55,11 +58,43 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
         (res: any) => {
           if (res) {
             log.debug('res: ', res);
+            this.video = res;
           }
         },
         (error: any) => {
           log.debug('error: ', error);
         }
       );
+  }
+
+  getAllVideos() {
+    this.isLoading = true;
+    const allVideos$ = this.videoService.getAllVideos();
+    allVideos$
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+        }),
+        untilDestroyed(this)
+      )
+      .subscribe(
+        (res: any) => {
+          if (res) {
+            this.allVideos = res;
+            this.allVideos = this.allVideos.filter(
+              (video: Video) => video._id !== this.videoID
+            );
+          }
+        },
+        (error: any) => {
+          log.debug('error: ', error);
+        }
+      );
+  }
+
+  goToVideo(id: string) {
+    this.router.navigateByUrl('/home').then(() => {
+      this.router.navigate(['/', 'video', id]);
+    });
   }
 }
