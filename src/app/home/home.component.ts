@@ -67,18 +67,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   goToVideo(id: string) {
-    if (!this.isAuthenticated) {
-      this.toastr.info(
-        'Kindly log in to your account to watch a video',
-        'Vidtube',
-        {
-          closeButton: true,
-          timeOut: 5000
-        }
-      );
-      this.router.navigateByUrl('/login');
-    } else {
-      log.debug('id: ', id);
-    }
+    this.router.navigate(['/', 'video', id]);
   }
 }
