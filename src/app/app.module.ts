@@ -1,3 +1,4 @@
+import { VideoDetailModule } from './video-detail/video-detail.module';
 import { RegisterModule } from './register/register.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -32,6 +33,7 @@ import { AppRoutingModule } from './app-routing.module';
     ShellModule,
     HomeModule,
     RegisterModule,
+    VideoDetailModule,
     LoginModule,
     AppRoutingModule // must be imported as the last module as it contains the fallback route
   ],
