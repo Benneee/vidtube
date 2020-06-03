@@ -75,10 +75,16 @@ export class LoginComponent implements OnInit, OnDestroy {
             };
             this.credsService.setCredentials(data);
             this.toastr.success('Welcome to Vidtube', `Hey ${username}`);
-            this.router.navigate(
-              [this.route.snapshot.queryParams.redirect || '/'],
-              { replaceUrl: true }
-            );
+            if (sessionStorage.getItem('videoId') !== null) {
+              const videoID = sessionStorage.getItem('videoId');
+              this.router.navigate(['/', 'video', videoID]);
+              sessionStorage.removeItem('videoId');
+            } else {
+              this.router.navigate(
+                [this.route.snapshot.queryParams.redirect || '/'],
+                { replaceUrl: true }
+              );
+            }
           }
         },
         (error: any) => {

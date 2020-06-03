@@ -10,10 +10,12 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { RouteReusableStrategy } from './route-reusable-strategy';
 import { HttpService } from './http/http.service';
+import { RequestsInterceptor } from './http/requests.interceptor';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, TranslateModule, RouterModule],
   providers: [
+    RequestsInterceptor,
     {
       provide: HttpClient,
       useClass: HttpService

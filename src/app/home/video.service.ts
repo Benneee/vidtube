@@ -13,7 +13,7 @@ export interface Video {
   url: string;
   description: string;
   date?: Date;
-  comments: string[];
+  comments: any[];
   upvotes: number;
   downvotes: number;
 }
@@ -32,5 +32,9 @@ export class VideoService extends BaseService<any> {
 
   getVideoById(id: string): Observable<any> {
     return this.sendGet(`${routes.videos}/${id}`, false);
+  }
+
+  postComment(id: string, payload: any): Observable<any> {
+    return this.sendPost(`${routes.videos}/${id}/comment`, payload, true, true);
   }
 }

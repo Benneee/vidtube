@@ -12,12 +12,12 @@
       </div>
 
       <div class="row mt-3">
-        <div class="col-6 float-left">
+        <div class="col-md-6 col-12 float-left">
           <h4 class="font-weight-bold">{{ video?.title }}</h4>
           <p>{{ video?.date | date: 'MMM dd, yyyy' }}</p>
         </div>
-        <div class="col-6">
-          <div class="d-flex justify-content-end">
+        <div class="col-md-6 col-12">
+          <div class="d-flex justify-content-start justify-content-md-end">
             <button
               data-toggle="tooltip"
               class="border-0 mr-2"
@@ -47,8 +47,67 @@
       </div>
       <hr />
 
-      <h4>About this video</h4>
+      <h5>About this video</h5>
       <p class="m-0 p-0">{{ video?.description }}</p>
+
+      <hr />
+      <div *ngIf="loggedIn; else notLoggedIn">
+        <form
+          [formGroup]="commentForm"
+          (ngSubmit)="submitComment()"
+          *ngIf="video?.comments?.length > 0 || addComment"
+        >
+          <div class="form-group">
+            <label for="comment">Add a comment</label> <br />
+            <textarea
+              id="comment"
+              formControlName="text"
+              class="form-control"
+            ></textarea>
+          </div>
+          <button
+            class="btn btn-primary btn-block mt-2"
+            [disabled]="commentForm.invalid"
+          >
+            Post Comment
+          </button>
+        </form>
+      </div>
+
+      <ng-template #notLoggedIn>
+        <button class="btn-primary btn-sm" routerLink="/login">Log in</button>
+        to post a comment.
+      </ng-template>
+
+      <hr />
+
+      <div *ngIf="video?.comments?.length > 0; else no_comment">
+        <h5 *ngIf="video?.comments?.length > 1; else single">
+          {{ video?.comments?.length }} Comments
+        </h5>
+        <ng-template #single>
+          <h5>{{ video?.comments?.length }} Comment</h5>
+        </ng-template>
+
+        <div *ngFor="let c of video?.comments" class="mb-2">
+          <p class="font-weight-bold m-0 p-0">{{ c?.postedBy?.username }}</p>
+          <p class="m-0 p-0">{{ c?.text }}</p>
+        </div>
+      </div>
+      <ng-template #no_comment>
+        <div class="card text-center">
+          <div class="card-body">
+            <p>There are no comments for this video</p>
+            <button class="btn btn-md btn-primary" (click)="openCommentForm()">
+              Post a comment
+            </button>
+          </div>
+        </div>
+      </ng-template>
+
+      <div class="line">
+        <hr />
+      </div>
     </div>
     <div class="col-md-4 col-12">
       <div class="row" *ngIf="allVideos">
