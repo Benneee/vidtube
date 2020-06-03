@@ -54,6 +54,9 @@ export class HeaderComponent implements OnInit {
             log.debug('res: ', res);
             this.toastr.success(res.message);
             this.credentialsService.unsetCredentials();
+            if (sessionStorage.getItem('videoId') !== null) {
+              sessionStorage.removeItem('videoId');
+            }
             this.router.navigate(['/login']);
           }
         },

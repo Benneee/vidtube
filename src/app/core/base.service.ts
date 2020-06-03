@@ -16,7 +16,7 @@ export class BaseService<M> {
   constructor(public httpClient: HttpClient) {}
 
   get token() {
-    const token = JSON.parse(sessionStorage.getItem('credentials')).token;
+    const token = JSON.parse(sessionStorage.getItem('credentials')).accessToken;
     return token || null;
   }
 

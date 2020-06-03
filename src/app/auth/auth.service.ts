@@ -6,7 +6,8 @@ import { Injectable } from '@angular/core';
 const routes = {
   login: 'user/login',
   logout: 'user/logout',
-  register: 'user/register'
+  register: 'user/register',
+  refreshToken: 'user/refresh_token'
 };
 
 export interface AuthCredentials {
@@ -38,5 +39,9 @@ export class AuthService extends BaseService<any> {
 
   register(payload: AuthCredentials): Observable<any> {
     return this.sendPost(routes.register, payload, false);
+  }
+
+  refreshAccessToken(): Observable<any> {
+    return this.sendPost(routes.register, {}, true);
   }
 }
