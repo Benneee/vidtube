@@ -27,7 +27,8 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     credService: CredentialsService,
     private videoService: VideoService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastr: ToastrService
   ) {
     this.loggedIn = credService.isAuthenticated();
   }
@@ -134,7 +135,53 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
         (res: any) => {
           if (res) {
             log.debug('res: ', res);
+            this.toastr.success(res);
+            this.getVideoId();
             sessionStorage.removeItem('videoId');
+          }
+        },
+        (error: any) => {
+          log.debug('error: ', error);
+        }
+      );
+  }
+
+  upvote() {
+    this.isLoading = true;
+    const upvote$ = this.videoService.upvoteVideo(this.videoID);
+    upvote$
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+        }),
+        untilDestroyed(this)
+      )
+      .subscribe(
+        (res: any) => {
+          if (res) {
+            this.video = res;
+          }
+        },
+        (error: any) => {
+          log.debug('error: ', error);
+        }
+      );
+  }
+
+  downvote() {
+    this.isLoading = true;
+    const downvote$ = this.videoService.downvoteVideo(this.videoID);
+    downvote$
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+        }),
+        untilDestroyed(this)
+      )
+      .subscribe(
+        (res: any) => {
+          if (res) {
+            this.video = res;
           }
         },
         (error: any) => {

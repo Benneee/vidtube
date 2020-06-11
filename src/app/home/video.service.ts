@@ -37,4 +37,12 @@ export class VideoService extends BaseService<any> {
   postComment(id: string, payload: any): Observable<any> {
     return this.sendPost(`${routes.videos}/${id}/comment`, payload, true, true);
   }
+
+  upvoteVideo(id: string): Observable<any> {
+    return this.sendPost(`${routes.videos}/${id}/upvote`, {}, false);
+  }
+
+  downvoteVideo(id: string): Observable<any> {
+    return this.sendPost(`${routes.videos}/${id}/downvote`, {}, false);
+  }
 }
