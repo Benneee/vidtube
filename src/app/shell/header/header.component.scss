@@ -1,0 +1,25 @@
+@import "src/theme/theme-variables";
+
+.navbar {
+  margin-bottom: $spacer;
+  background: rgb(84, 11, 91);
+  cursor: pointer;
+}
+
+.navbar-toggler {
+  border: 1px solid #fff;
+}
+
+.navbar-toggler-icon i {
+  color: #fff;
+  font-size: 28px;
+}
+
+.nav-link.dropdown-toggle {
+  cursor: pointer;
+}
+
+a:not(.fas) {
+  text-decoration: none;
+  font-family: "B612", sans-serif;
+}

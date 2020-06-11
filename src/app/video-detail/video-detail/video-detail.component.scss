@@ -1,0 +1,17 @@
+.line {
+  display: none;
+}
+
+p,
+span,
+h4,
+h5,
+button:not(i) {
+  font-family: "B612", sans-serif;
+}
+
+@media screen and (max-width: 670px) {
+  .line {
+    display: block;
+  }
+}
