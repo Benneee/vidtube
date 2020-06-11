@@ -69,6 +69,9 @@
             class="btn btn-primary btn-block mt-2"
             [disabled]="commentForm.invalid"
           >
+            <span>
+              <i [hidden]="!isLoading" class="fas fa-spinner fa-spin"></i>
+            </span>
             Post Comment
           </button>
         </form>

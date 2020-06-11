@@ -27,7 +27,8 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     credService: CredentialsService,
     private videoService: VideoService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastr: ToastrService
   ) {
     this.loggedIn = credService.isAuthenticated();
   }
@@ -134,6 +135,8 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
         (res: any) => {
           if (res) {
             log.debug('res: ', res);
+            this.toastr.success(res);
+            this.getVideoId();
             sessionStorage.removeItem('videoId');
           }
         },
