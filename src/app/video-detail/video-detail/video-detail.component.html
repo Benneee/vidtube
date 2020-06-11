@@ -103,7 +103,11 @@
         <div class="card text-center">
           <div class="card-body">
             <p>There are no comments for this video</p>
-            <button class="btn btn-md btn-primary" (click)="openCommentForm()">
+            <button
+              class="btn btn-md btn-primary"
+              *ngIf="loggedIn"
+              (click)="openCommentForm()"
+            >
               Post a comment
             </button>
           </div>
