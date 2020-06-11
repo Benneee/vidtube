@@ -145,4 +145,48 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
         }
       );
   }
+
+  upvote() {
+    this.isLoading = true;
+    const upvote$ = this.videoService.upvoteVideo(this.videoID);
+    upvote$
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+        }),
+        untilDestroyed(this)
+      )
+      .subscribe(
+        (res: any) => {
+          if (res) {
+            this.video = res;
+          }
+        },
+        (error: any) => {
+          log.debug('error: ', error);
+        }
+      );
+  }
+
+  downvote() {
+    this.isLoading = true;
+    const downvote$ = this.videoService.downvoteVideo(this.videoID);
+    downvote$
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+        }),
+        untilDestroyed(this)
+      )
+      .subscribe(
+        (res: any) => {
+          if (res) {
+            this.video = res;
+          }
+        },
+        (error: any) => {
+          log.debug('error: ', error);
+        }
+      );
+  }
 }

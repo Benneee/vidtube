@@ -31,6 +31,7 @@
               class="border-0 mr-2"
               data-placement="bottom"
               title=" {{ video?.upvotes }} upvotes"
+              (click)="upvote()"
             >
               {{ video?.upvotes }} <i class="fas fa-thumbs-up"></i>
             </button>
@@ -39,6 +40,7 @@
               class="border-0"
               data-placement="bottom"
               title=" {{ video?.downvotes }} downvotes"
+              (click)="downvote()"
             >
               {{ video?.downvotes }} <i class="fas fa-thumbs-down"></i>
             </button>
