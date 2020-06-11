@@ -6,6 +6,15 @@
   cursor: pointer;
 }
 
+.navbar-toggler {
+  border: 1px solid #fff;
+}
+
+.navbar-toggler-icon i {
+  color: #fff;
+  font-size: 28px;
+}
+
 .nav-link.dropdown-toggle {
   cursor: pointer;
 }

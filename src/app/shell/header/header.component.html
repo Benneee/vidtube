@@ -1,5 +1,5 @@
 <header>
-  <nav class="navbar navbar-expand-lg">
+  <nav class="navbar navbar-expand-lg py-3">
     <a routerLink="/home" translate class="text-light">
       Vidtube
       <i class="fas fa-video"></i>
@@ -12,7 +12,10 @@
       (click)="toggleMenu()"
       [attr.aria-expanded]="!menuHidden"
     >
-      <span class="navbar-toggler-icon"></span>
+      <!-- <span class="navbar-toggler-icon"></span> -->
+      <span class="navbar-toggler-icon">
+        <i class="fas fa-bars"></i>
+      </span>
     </button>
     <div
       id="navbar-menu"
