@@ -2,6 +2,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 import { VideoService, Video } from './../../home/video.service';
 import { ToastrService } from 'ngx-toastr';
+import { fadeInTrigger } from 'src/app/animations';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CredentialsService, Logger, untilDestroyed } from '@app/core';
@@ -11,7 +12,8 @@ const log = new Logger('Video');
 @Component({
   selector: 'app-video-detail',
   templateUrl: './video-detail.component.html',
-  styleUrls: ['./video-detail.component.scss']
+  styleUrls: ['./video-detail.component.scss'],
+  animations: [fadeInTrigger]
 })
 export class VideoDetailComponent implements OnInit, OnDestroy {
   videoID: string;

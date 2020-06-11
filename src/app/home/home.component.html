@@ -4,7 +4,7 @@
 <div class="container-fluid">
   <div class="row" *ngIf="videos">
     <div class="col-md-4 col-12 col-lg-3" *ngFor="let v of videos">
-      <div class="card mt-lg-2 mt-md-2 mt-3">
+      <div class="card mt-lg-2 mt-md-2 mt-3" [@fadeIn]>
         <div class="card-img embed-responsive embed-responsive-4by3">
           <video
             class="embed-responsive-item"
