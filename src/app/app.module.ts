@@ -16,6 +16,7 @@ import { ShellModule } from './shell/shell.module';
 import { LoginModule } from './login/login.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ProfileModule } from './profile/profile.module';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { AppRoutingModule } from './app-routing.module';
     RegisterModule,
     VideoDetailModule,
     LoginModule,
+    ProfileModule,
     AppRoutingModule // must be imported as the last module as it contains the fallback route
   ],
   declarations: [AppComponent],

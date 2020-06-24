@@ -1,3 +1,4 @@
+import { fadeInTrigger } from './../animations';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { untilDestroyed, Logger, CredentialsService } from '@app/core';
@@ -10,7 +11,8 @@ const log = new Logger('Home');
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  animations: [fadeInTrigger]
 })
 export class HomeComponent implements OnInit, OnDestroy {
   isLoading = false;

@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { VideoDetailComponent } from './video-detail/video-detail.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/', pathMatch: 'full' },
   {
     path: 'video/:id',
     component: VideoDetailComponent,
