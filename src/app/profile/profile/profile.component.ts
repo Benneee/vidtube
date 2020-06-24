@@ -1,20 +1,10 @@
-import {
-  FormGroup,
-  FormControl,
-  FormBuilder,
-  Validators
-} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Logger } from './../../core/logger.service';
 import { finalize } from 'rxjs/operators';
 import { ProfileService } from './../profile.service';
 import { VideoService } from './../../home/video.service';
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  AfterContentChecked
-} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { untilDestroyed, CredentialsService } from '@app/core';
 import { Credentials } from '@app/auth/auth.service';
 import { fadeInTrigger } from '@app/animations';
@@ -27,8 +17,7 @@ const log = new Logger('Profile');
   styleUrls: ['./profile.component.scss'],
   animations: [fadeInTrigger]
 })
-export class ProfileComponent
-  implements OnInit, OnDestroy, AfterContentChecked {
+export class ProfileComponent implements OnInit, OnDestroy {
   isLoading = false;
   userVideos: any[] = [];
   profileInfo: any = null;
@@ -52,6 +41,7 @@ export class ProfileComponent
   ngOnInit() {
     this.getUserId();
     this.initVideoUploadForm();
+    this.generateAvatar();
   }
 
   initVideoUploadForm() {
@@ -60,10 +50,6 @@ export class ProfileComponent
       title: ['', Validators.required],
       description: ['', Validators.required]
     });
-  }
-
-  ngAfterContentChecked(): void {
-    this.generateAvatar();
   }
 
   ngOnDestroy() {}
