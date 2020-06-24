@@ -1,9 +1,9 @@
 <app-loader [isLoading]="isLoading"></app-loader>
 <div class="pb-3">
-  <div class="container-fluid play-bg">
+  <div class="container-fluid play-bg" [@fadeIn]>
     <div class="container">
       <div class="header row" *ngIf="profileInfo !== null">
-        <div class="col-md-5 col-12 align-self-center">
+        <div class="col-md-5 col-12 align-self-center" [@fadeIn]>
           <img
             *ngIf="newImgUrl !== null"
             [src]="newImgUrl"
