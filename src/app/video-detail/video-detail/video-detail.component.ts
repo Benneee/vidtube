@@ -60,7 +60,7 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
   getVideoId() {
     this.route.params.subscribe((param: Params) => {
       if (!param['id']) {
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/');
         return;
       } else {
         this.videoID = param['id'];
@@ -118,7 +118,7 @@ export class VideoDetailComponent implements OnInit, OnDestroy {
   }
 
   goToVideo(id: string) {
-    this.router.navigateByUrl('/home').then(() => {
+    this.router.navigateByUrl('/').then(() => {
       this.router.navigate(['/', 'video', id]);
     });
   }
