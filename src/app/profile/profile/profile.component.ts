@@ -1,37 +1,69 @@
+import {
+  FormGroup,
+  FormControl,
+  FormBuilder,
+  Validators
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Logger } from './../../core/logger.service';
 import { finalize } from 'rxjs/operators';
 import { ProfileService } from './../profile.service';
 import { VideoService } from './../../home/video.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  AfterContentChecked
+} from '@angular/core';
 import { untilDestroyed, CredentialsService } from '@app/core';
 import { Credentials } from '@app/auth/auth.service';
+import { fadeInTrigger } from '@app/animations';
 
 const log = new Logger('Profile');
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
+  animations: [fadeInTrigger]
 })
-export class ProfileComponent implements OnInit, OnDestroy {
+export class ProfileComponent
+  implements OnInit, OnDestroy, AfterContentChecked {
   isLoading = false;
   userVideos: any[] = [];
-  profileInfo: any;
+  profileInfo: any = null;
   loggedIn = false;
   userId: string;
+  imgUrl = 'https://api.adorable.io/avatars/';
+  newImgUrl: any = null;
+  videosCount: number;
+  uploadVideoForm: FormGroup;
 
   constructor(
     private videoService: VideoService,
     private router: Router,
     private profileService: ProfileService,
-    credService: CredentialsService
+    credService: CredentialsService,
+    private fb: FormBuilder
   ) {
     this.loggedIn = credService.isAuthenticated();
   }
 
   ngOnInit() {
     this.getUserId();
+    this.initVideoUploadForm();
+  }
+
+  initVideoUploadForm() {
+    this.uploadVideoForm = this.fb.group({
+      video: ['', Validators.required],
+      title: ['', Validators.required],
+      description: ['', Validators.required]
+    });
+  }
+
+  ngAfterContentChecked(): void {
+    this.generateAvatar();
   }
 
   ngOnDestroy() {}
@@ -50,6 +82,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
     } else {
       this.router.navigate(['/login']);
     }
+  }
+
+  generateAvatar() {
+    const vary = Math.floor(Math.random() * (250 - 100)) + 100;
+    this.newImgUrl = `${this.imgUrl}${vary}`;
+    return this.newImgUrl;
   }
 
   getProfileInfo(id: string) {
@@ -92,12 +130,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
             this.userVideos = this.userVideos.filter(
               (video: any) => video.userId === this.userId
             );
-            log.debug('videos: ', this.userVideos);
+            this.videosCount = this.userVideos.length;
+            // log.debug("user's videos: ", this.userVideos);
           }
         },
         (error: any) => {
           log.debug('error: ', error);
         }
       );
+  }
+
+  goToVideo(id: string) {
+    this.router.navigate(['/', 'video', id]);
   }
 }

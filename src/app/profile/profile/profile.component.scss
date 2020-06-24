@@ -1,0 +1,74 @@
+.header {
+  height: 55vh;
+}
+
+.credentials {
+  .username {
+    font-size: 5rem;
+  }
+
+  .channel,
+  .date-joined {
+    font-size: 2rem;
+  }
+}
+
+header h2 {
+  color: #fff;
+}
+
+#drop-area {
+  border: 2px dashed #ccc;
+  border-radius: 20px;
+  // width: 60vw;
+  padding: 2rem;
+  margin: 3rem auto;
+  font-family: Arial;
+}
+
+.upload-form {
+  margin-bottom: 10px;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px;
+  background: #ccc;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.button:hover {
+  background: #ddd;
+}
+
+#fileElem {
+  display: none;
+}
+
+.play-bg {
+  background: rgb(30, 20, 38);
+  background: linear-gradient(
+    90deg,
+    rgba(30, 20, 38, 1) 17%,
+    rgba(84, 11, 91, 1) 36%,
+    rgba(120, 11, 195, 1) 90%
+  );
+}
+
+@media screen and (max-width: 640px) {
+  .header {
+    height: 70vh;
+  }
+  .credentials {
+    .username {
+      font-size: 3rem;
+    }
+
+    .channel,
+    .date-joined {
+      font-size: 1.25rem;
+    }
+  }
+}

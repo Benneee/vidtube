@@ -1,1 +1,96 @@
-<p>profile works!</p>
+<app-loader [isLoading]="isLoading"></app-loader>
+<div class="pb-3">
+  <div class="container-fluid play-bg">
+    <div class="container">
+      <div class="header row" *ngIf="profileInfo !== null">
+        <div class="col-md-5 col-12 align-self-center">
+          <img
+            *ngIf="newImgUrl !== null"
+            [src]="newImgUrl"
+            alt="profileInfo.username"
+            class="img-fluid"
+          />
+        </div>
+        <div class="col-md-7 col-12 align-self-center credentials text-light">
+          <h2 class="text-capitalize username">
+            {{ profileInfo?.username }}
+          </h2>
+
+          <h5 class="date-joined">
+            Member since {{ profileInfo?.date | date }}
+          </h5>
+
+          <h5 class="channel" *ngIf="profileInfo.channelName !== ''">
+            Channel: {{ profileInfo?.channelName }}
+          </h5>
+
+          <h5 *ngIf="videosCount > 0">{{ videosCount }} videos</h5>
+          <h5 *ngIf="videosCount === 0 || videosCount === 1">
+            {{ videosCount }} video
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="container my-5">
+    <div class="row">
+      <div class="col-md-6 col-12 align-self-center">
+        <h2 class="username text-vidtube">Upload a video</h2>
+      </div>
+      <div class="col-md-6 col-12">
+        <form class="upload-form" [formGroup]="uploadVideoForm">
+          <input
+            type="text"
+            class="form-control mb-3"
+            placeholder="Enter video title"
+            formControlName="title"
+          />
+          <textarea
+            name="description"
+            id="description"
+            placeholder="Enter a description"
+            class="form-control mb-3"
+          ></textarea>
+          <p>Upload videos by dragging and dropping here</p>
+          <input type="file" formControlName="video" id="fileElem" multiple />
+
+          <label for="fileElem" class="button">Select files</label>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <hr /> -->
+
+  <div class="container mt-5" *ngIf="userVideos.length > 1">
+    <h5 class="text-vidtube my-3 text-capitalize" *ngIf="profileInfo !== null">
+      Videos Uploaded By {{ profileInfo?.username }}
+    </h5>
+    <div class="row" *ngIf="userVideos">
+      <div class="col-md-4 col-12 col-lg-3" *ngFor="let v of userVideos">
+        <div class="card mt-lg-2 mt-md-2 mt-3" [@fadeIn]>
+          <div class="card-img embed-responsive embed-responsive-4by3">
+            <video
+              class="embed-responsive-item"
+              height="153.34"
+              width="273.31"
+              (click)="goToVideo(v.id)"
+            >
+              <source [src]="v.url" type="video/mp4" />
+              Sorry, your browser doesn't support embedded videos.
+            </video>
+          </div>
+          <div class="card-text">
+            <p class="font-weight-bold p-0 text-center text-capitalize">
+              {{ v?.title }}
+            </p>
+            <div class="text-center mt-2">
+              <span>{{ v?.date | date: 'MMM dd, yyyy, hh:ss aa' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

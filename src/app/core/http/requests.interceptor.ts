@@ -24,7 +24,7 @@ export class RequestsInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         console.log(error);
 
-        if (error.status === 401 || error.status === 400) {
+        if (error.status === 400) {
           // refresh access token
           return this.refreshAccessToken().pipe(
             switchMap(() => {
@@ -36,7 +36,7 @@ export class RequestsInterceptor implements HttpInterceptor {
                 res => console.log(res),
                 errr => console.log('err: ', errr)
               );
-              return empty();
+              return null;
             })
           );
         }

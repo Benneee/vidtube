@@ -1,5 +1,5 @@
 <header>
-  <nav class="navbar navbar-expand-lg py-3">
+  <nav class="navbar navbar-expand-lg py-3 mb-0">
     <a routerLink="/" translate class="text-light">
       Vidtube
       <i class="fas fa-video"></i>
@@ -71,7 +71,7 @@
           <span translate>Profile</span>
         </a>
 
-        <a
+        <!-- <a
           class="nav-item nav-link text-light"
           routerLink="/"
           routerLinkActive="active"
@@ -79,7 +79,7 @@
         >
           <i class="fas fa-heart"></i> &nbsp;
           <span translate>Favorites</span>
-        </a>
+        </a> -->
         <a
           *ngIf="isAuthenticated"
           (click)="logout()"
